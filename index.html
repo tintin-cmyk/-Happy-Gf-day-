@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy National GF Day</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: linear-gradient(to top, #ffdde1, #ee9ca7);
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    .intro-screen {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      z-index: 2;
+    }
+
+    .heart-lock {
+      width: 120px;
+      height: 100px;
+      position: relative;
+      background: pink;
+      border-radius: 60% 60% 0 0;
+      box-shadow: 0 0 0 4px #fff inset;
+    }
+
+    .heart-lock::before,
+    .heart-lock::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 100px;
+      background: pink;
+      border-radius: 50%;
+      top: 0;
+    }
+
+    .heart-lock::before {
+      left: -60px;
+    }
+
+    .heart-lock::after {
+      right: -60px;
+    }
+
+    .padlock {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 18px;
+      border: none;
+      text-align: center;
+    }
+
+    .intro-screen button {
+      padding: 10px 25px;
+      margin-top: 15px;
+      background: #db409a;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .letter {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    .letter h1 { font-size: 36px; margin-bottom: 20px; }
+    .letter p { font-size: 20px; }
+
+    .qr img {
+      width: 200px;
+      border-radius: 16px;
+      margin-top: 20px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0;
+      animation: float 15s linear forwards;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-1000px) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Password Screen -->
+  <div class="intro-screen" id="intro">
+    <div class="heart-lock"></div>
+    <p style="margin-top: 20px; font-size: 18px;">Unlock the love with our special date 💘</p>
+    <input type="password" id="pwd" class="padlock" placeholder="🔒 Enter Code">
+    <button onclick="checkPwd()">Open Heart</button>
+    <div id="error"></div>
+  </div>
+
+  <!-- Love Message + QR -->
+  <div class="letter" id="letter">
+    <h1>Happy National Girlfriend Day</h1>
+    <p>Even though you're not officially my girlfriend yet, Ayen,<br>
+       it just feels right to send this because you deserve to be flexed<br>
+       and I love you so much 💘</p>
+
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://open.spotify.com/track/5SjfjoYaRJ5jycgqwV0ow0" alt="QR Code">
+    </div>
+
+    <p>🎶 Scan to hear the song I picked just for you</p>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const intro = document.getElementById('intro');
+    const letter = document.getElementById('letter');
+
+    function checkPwd(){
+      const val = document.getElementById('pwd').value;
+      if(val === '0721') {
+        intro.style.display = 'none';
+        letter.style.display = 'block';
+
+        setTimeout(() => {
+          launchFlowers();
+        }, 1000);
+      } else {
+        document.getElementById('error').innerText = 'Try again 💔';
+      }
+    }
+
+    function launchFlowers(){
+      for(let i=0; i<25; i++){
+        const f = document.createElement('div');
+        f.className = 'flower';
+        f.textContent = ['🌸','🌷','🌹'][Math.floor(Math.random()*3)];
+        f.style.left = Math.random()*100 + 'vw';
+        f.style.animationDelay = (Math.random() * 5) + 's';
+        f.style.fontSize = (16 + Math.random()*20) + 'px';
+        document.body.appendChild(f);
+      }
+    }
+
+    // OPTIONAL background music (just plug in a real MP3 link)
+    window.onload = () => {
+      const audio = document.createElement('audio');
+      audio.src = "https://your-mp3-url.mp3"; // Replace with your hosted audio
+      audio.autoplay = true;
+      audio.loop = true;
+      audio.style.display = 'none';
+      document.body.appendChild(audio);
+    };
+  </script>
+
+</body>
+</html>
